@@ -43,6 +43,7 @@ useMeta({
     },
     faviconIco: {
       rel: 'icon',
+      type: 'image/x-icon',
       href: `${import.meta.env.BASE_URL}favicon.ico`,
     },
     favicon96: {
