@@ -23,7 +23,7 @@ app.use(Quasar, {
     Loading,
   },
   config: {
-    dark: false,
+    dark: true,
     brand: {
       primary: '#1976d2',
       secondary: '#607d8b',
