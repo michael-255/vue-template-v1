@@ -1,0 +1,42 @@
+import type {
+  IdType,
+  LogDetailsType,
+  LogLabelType,
+  LogLevelType,
+  TimestampzType,
+} from '@/shared/types'
+import { uid } from 'quasar'
+
+interface LogParams {
+  logLevel: LogLevelType
+  label: LogLabelType
+  details: LogDetailsType | Error
+}
+
+/**
+ * Log model primarily used for local storage of logs.
+ */
+export class Log {
+  id: IdType
+  created_at: TimestampzType
+  log_level: LogLevelType
+  label: LogLabelType
+  details: LogDetailsType
+
+  constructor(params: LogParams) {
+    this.id = uid()
+    this.created_at = new Date().toISOString()
+    this.log_level = params.logLevel
+    this.label = params.label
+
+    if (params.details instanceof Error) {
+      this.details = {
+        name: params.details.name,
+        message: params.details.message,
+        stack: params.details.stack,
+      }
+    } else {
+      this.details = params.details
+    }
+  }
+}

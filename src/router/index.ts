@@ -14,7 +14,7 @@ const router = createRouter({
       children: [
         {
           path: '/home',
-          name: RouteNameEnum.EXAMPLES_DASHBOARD,
+          name: RouteNameEnum.DASHBOARD,
           component: HomeView,
         },
       ],

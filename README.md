@@ -4,7 +4,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## TODO
 
-- TIP
+- WIP
 
 ## Project Setup
 
@@ -230,4 +230,4 @@ export default defineConfigWithVueTs(
 ## Credits
 
 - Base `Web App Template` created by Michael Joy (michael-255 on GitHub)
-- Favicons and manifest created by [RealFaviconGenerator](https://realfavicongenerator.net/)
+- Initial favicons and manifest created by [RealFaviconGenerator](https://realfavicongenerator.net/)

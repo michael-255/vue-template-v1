@@ -12,8 +12,7 @@
  */
 export enum RouteNameEnum {
   MENU_LAYOUT = 'MenuLayout',
-  EXAMPLES_DASHBOARD = 'ExamplesDashboard',
-  TABLE = 'Table',
+  DASHBOARD = 'Dashboard',
   SETTINGS = 'Settings',
   ABOUT = 'About',
   DONATE = 'Donate',
@@ -26,8 +25,6 @@ export enum RouteNameEnum {
 export enum TableEnum {
   SETTINGS = 'settings', // Standalone
   LOGS = 'logs', // Standalone
-  EXAMPLES = 'examples', // Parent
-  EXAMPLE_RESULTS = 'example-results', // Child
 }
 
 /**
@@ -86,10 +83,12 @@ export enum DurationMSEnum {
  * The only valid IDs for settings in the application.
  */
 export enum SettingIdEnum {
-  ADVANCED_MODE = 'Advanced Mode',
-  INSTRUCTIONS_OVERLAY = 'Instructions Overlay',
+  USER_EMAIL = 'User Email',
+  USER_PASSWORD = 'User Password',
+  PROJECT_URL = 'Project URL',
+  PROJECT_PUBLIC_KEY = 'Project API Key',
   CONSOLE_LOGS = 'Console Logs',
-  INFO_MESSAGES = 'Info Messages',
+  INFO_POPUPS = 'Info Popups',
   LOG_RETENTION_DURATION = 'Log Rentention Duration',
 }
 
