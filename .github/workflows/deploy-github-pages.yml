@@ -60,7 +60,7 @@ jobs:
 
       # Test
       - name: Unit Tests
-        run: npm test
+        run: npm test:unit
 
       # Deploy
       - name: Setup Pages
