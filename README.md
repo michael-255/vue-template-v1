@@ -4,7 +4,9 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## TODO
 
-- WIP
+- Add `Zod`
+- Add `Pinia`
+- Add `Dexie`
 
 ## Project Setup
 
