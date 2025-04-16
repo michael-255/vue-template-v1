@@ -4,10 +4,13 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { appDescription } from './shared/constants'
 
+const title = 'Quasar App'
+
 /**
  * Do NOT overwrite these specific properties in another useMeta call.
  */
 useMeta({
+  title: title,
   meta: {
     description: { name: 'description', content: appDescription },
     charset: { charset: 'UTF-8' },
@@ -15,9 +18,10 @@ useMeta({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
     },
+    // Color values need to match whats in the manifest
     themeColor: {
       name: 'theme-color',
-      content: `${colors.getPaletteColor('black')}`,
+      content: `${colors.getPaletteColor('primary')}`,
     },
     backgroundColor: {
       name: 'background-color',
