@@ -140,7 +140,7 @@ export default defineConfig({
 Configure GitHub Pages to deploy using GitHub Actions.
 
 - Create workflow file in `~/.github/workflows/deploy-github-pages.yml`
-- Add `base: '/REPO_NAME/'` to `vite.config.ts`
+- Add `base: '/REPO/'` to `vite.config.ts`
 - Push the latest changes to your repository
 - In GitHub for this repository, go to `Settings` > `Pages`
 - Under `Build and Deployment` > `Source`, select `GitHub Actions`
@@ -163,9 +163,22 @@ Configure GitHub Pages to deploy using GitHub Actions.
 - Update `~/public/*`
 
   - Use [RealFaviconGenerator](https://realfavicongenerator.net/) to generate favicons and manifest
-  - Update `manifest.webmanifest` with `"start_url": "./",`
+  - Update `manifest.webmanifest` with `"start_url": "<SITE>/<REPO>/",`
   - Update `manifest.webmanifest` with `theme_color` to match `App.vue -> useMeta()`
   - Update `manifest.webmanifest` with `background_color` to match `App.vue -> useMeta()`
+
+- Update `index.html`
+
+```html
+<!doctype html>
+<html lang="en-US">
+  <head></head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+```
 
 - Update `GitHub`
 
