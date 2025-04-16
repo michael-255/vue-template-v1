@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { colors, useMeta } from 'quasar'
+import { useMeta } from 'quasar'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { appDescription } from './shared/constants'
@@ -15,10 +15,10 @@ useMeta({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
     },
-    themeColor: {
-      name: 'theme-color',
-      content: `${colors.getPaletteColor('primary')}`,
-    },
+    // themeColor: {
+    //   name: 'theme-color',
+    //   content: `${colors.getPaletteColor('primary')}`,
+    // },
   },
   link: {
     manifest: {
