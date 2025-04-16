@@ -14,11 +14,7 @@ useMeta({
     charset: { charset: 'UTF-8' },
     viewport: {
       name: 'viewport',
-      content: 'width=device-width, initial-scale=1',
-    },
-    colorScheme: {
-      name: 'color-scheme',
-      content: 'dark light',
+      content: 'width=device-width, initial-scale=1.0',
     },
     // Color values need to match whats in the public manifest
     themeColor: {
