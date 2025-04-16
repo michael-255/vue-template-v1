@@ -4,9 +4,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## TODO
 
-- Add `Zod`
-- Add `Pinia`
-- Add `Dexie`
+- TIP
 
 ## Project Setup
 
@@ -163,9 +161,34 @@ Configure GitHub Pages to deploy using GitHub Actions.
 - Update `~/public/*`
 
   - Use [RealFaviconGenerator](https://realfavicongenerator.net/) to generate favicons and manifest
-  - Update `manifest.webmanifest` with `"start_url": "<SITE>/<REPO>/",`
   - Update `manifest.webmanifest` with `theme_color` to match `App.vue -> useMeta()`
   - Update `manifest.webmanifest` with `background_color` to match `App.vue -> useMeta()`
+
+```json
+{
+  "name": "<PROJECT_NAME>",
+  "short_name": "<PROJECT_NAME>",
+  "start_url": "<SITE>/<REPO>/",
+  "theme_color": "#1976d2",
+  "background_color": "black",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
+```
 
 - Update `index.html`
 
@@ -178,6 +201,19 @@ Configure GitHub Pages to deploy using GitHub Actions.
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
+```
+
+- Update `eslint.config.ts`
+
+```ts
+export default defineConfigWithVueTs(
+  // ...
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+)
 ```
 
 - Update `GitHub`

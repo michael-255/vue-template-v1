@@ -4,7 +4,7 @@
   "start_url": "https://michael-255.github.io/vue-template-v1/",
   "theme_color": "#1976d2",
   "background_color": "black",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "any",
   "icons": [
     {

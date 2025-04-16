@@ -3,7 +3,7 @@ import { colors, useMeta } from 'quasar'
 import { appDescription, appTitle } from './shared/constants'
 
 /**
- * Do NOT overwrite these specific properties in another useMeta call.
+ * Do NOT overwrite these specific properties in another useMeta call
  */
 useMeta({
   title: appTitle,
@@ -14,7 +14,7 @@ useMeta({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1.0',
     },
-    // Color values need to match whats in the public manifest
+    // Color values MUST match the manifest
     themeColor: {
       name: 'theme-color',
       content: `${colors.getPaletteColor('primary')}`,
