@@ -19,11 +19,11 @@ useMeta({
     // Color values need to match whats in the public manifest
     themeColor: {
       name: 'theme-color',
-      content: `${colors.getPaletteColor('primary')}`,
+      content: `${colors.getPaletteColor('white')}`,
     },
     backgroundColor: {
       name: 'background-color',
-      content: `${colors.getPaletteColor('black')}`,
+      content: `${colors.getPaletteColor('white')}`,
     },
   },
   link: {
@@ -40,6 +40,10 @@ useMeta({
       rel: 'icon',
       type: 'image/svg+xml',
       href: `${import.meta.env.BASE_URL}favicon.svg`,
+    },
+    faviconIco: {
+      rel: 'icon',
+      href: `${import.meta.env.BASE_URL}favicon.ico`,
     },
     favicon96: {
       rel: 'icon',
