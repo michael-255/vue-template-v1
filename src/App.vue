@@ -17,11 +17,11 @@ useMeta({
     },
     themeColor: {
       name: 'theme-color',
-      content: `${colors.getPaletteColor('accent')}`,
+      content: `${colors.getPaletteColor('black')}`,
     },
     backgroundColor: {
       name: 'background-color',
-      content: `${colors.getPaletteColor('positive')}`,
+      content: `${colors.getPaletteColor('black')}`,
     },
   },
   link: {
