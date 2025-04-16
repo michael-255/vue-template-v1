@@ -16,14 +16,18 @@ useMeta({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
     },
+    colorScheme: {
+      name: 'color-scheme',
+      content: 'dark light',
+    },
     // Color values need to match whats in the public manifest
     themeColor: {
       name: 'theme-color',
-      content: `${colors.getPaletteColor('white')}`,
+      content: `${colors.getPaletteColor('primary')}`,
     },
     backgroundColor: {
       name: 'background-color',
-      content: `${colors.getPaletteColor('white')}`,
+      content: `${colors.getPaletteColor('black')}`,
     },
   },
   link: {
