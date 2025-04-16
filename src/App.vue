@@ -36,16 +36,16 @@ useMeta({
       sizes: '180x180',
       href: `${import.meta.env.BASE_URL}apple-touch-icon.png`,
     },
-    favicon: {
-      rel: 'icon',
-      type: 'image/svg+xml',
-      href: `${import.meta.env.BASE_URL}favicon.svg`,
-    },
-    faviconIco: {
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: `${import.meta.env.BASE_URL}favicon.ico`,
-    },
+    // favicon: {
+    //   rel: 'icon',
+    //   type: 'image/svg+xml',
+    //   href: `${import.meta.env.BASE_URL}favicon.svg`,
+    // },
+    // faviconIco: {
+    //   rel: 'icon',
+    //   type: 'image/x-icon',
+    //   href: `${import.meta.env.BASE_URL}favicon.ico`,
+    // },
     favicon96: {
       rel: 'icon',
       type: 'image/png',
