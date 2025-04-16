@@ -163,6 +163,9 @@ Configure GitHub Pages to deploy using GitHub Actions.
 - Update `~/public/*`
 
   - Use [RealFaviconGenerator](https://realfavicongenerator.net/) to generate favicons and manifest
+  - Update `manifest.webmanifest` with `"start_url": "./",`
+  - Update `manifest.webmanifest` with `theme_color` to match `App.vue -> useMeta()`
+  - Update `manifest.webmanifest` with `background_color` to match `App.vue -> useMeta()`
 
 - Update `GitHub`
 

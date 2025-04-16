@@ -1,6 +1,7 @@
 {
   "name": "Web App Template",
   "short_name": "Web App Template",
+  "start_url": "./",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,5 +16,7 @@
       "purpose": "maskable"
     }
   ],
+  "theme_color": "#673ab7",
+  "background_color": "#4caf50",
   "display": "standalone"
 }
