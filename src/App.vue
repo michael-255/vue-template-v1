@@ -36,33 +36,11 @@ useMeta({
       sizes: '180x180',
       href: `${import.meta.env.BASE_URL}apple-touch-icon.png`,
     },
-    // favicon: {
-    //   rel: 'icon',
-    //   type: 'image/svg+xml',
-    //   href: `${import.meta.env.BASE_URL}favicon.svg`,
-    // },
-    // faviconIco: {
-    //   rel: 'icon',
-    //   type: 'image/x-icon',
-    //   href: `${import.meta.env.BASE_URL}favicon.ico`,
-    // },
     favicon96: {
       rel: 'icon',
       type: 'image/png',
       sizes: '96x96',
       href: `${import.meta.env.BASE_URL}favicon-96x96.png`,
-    },
-    webAppManifest192: {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '192x192',
-      href: `${import.meta.env.BASE_URL}web-app-manifest-192x192.png`,
-    },
-    webAppManifest512: {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '512x512',
-      href: `${import.meta.env.BASE_URL}web-app-manifest-512x512.png`,
     },
   },
   noscript: {
