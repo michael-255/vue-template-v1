@@ -1,5 +1,6 @@
 {
   "name": "vue-template-v1",
+  "description": "Web App Template is a foundation for building web apps with Vue 3",
   "version": "1.0.0",
   "private": true,
   "type": "module",

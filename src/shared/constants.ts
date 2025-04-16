@@ -3,7 +3,7 @@ export const appDatabaseVersion = '6.0.0'
 export const appTitle = 'Web App Template'
 
 export const appDescription = `
-${appTitle} is a foundation for building web apps with Vue 3, TypeScript, and Quasar 2.
+${appTitle} is a foundation for building web apps with Vue 3.
 `
 
 export const displayDateFormat = 'ddd, YYYY MMM Do, h:mm A' // Sun, 2024 Sep 1st, 12:17 PM

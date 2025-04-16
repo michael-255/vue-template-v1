@@ -2,15 +2,13 @@
 import { colors, useMeta } from 'quasar'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { appDescription } from './shared/constants'
-
-const title = 'Quasar App'
+import { appDescription, appTitle } from './shared/constants'
 
 /**
  * Do NOT overwrite these specific properties in another useMeta call.
  */
 useMeta({
-  title: title,
+  title: appTitle,
   meta: {
     description: { name: 'description', content: appDescription },
     charset: { charset: 'UTF-8' },
@@ -18,7 +16,7 @@ useMeta({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
     },
-    // Color values need to match whats in the manifest
+    // Color values need to match whats in the public manifest
     themeColor: {
       name: 'theme-color',
       content: `${colors.getPaletteColor('primary')}`,
@@ -38,11 +36,28 @@ useMeta({
       sizes: '180x180',
       href: `${import.meta.env.BASE_URL}apple-touch-icon.png`,
     },
+    favicon: {
+      rel: 'icon',
+      type: 'image/svg+xml',
+      href: `${import.meta.env.BASE_URL}favicon.svg`,
+    },
     favicon96: {
       rel: 'icon',
       type: 'image/png',
       sizes: '96x96',
       href: `${import.meta.env.BASE_URL}favicon-96x96.png`,
+    },
+    webAppManifest192: {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '192x192',
+      href: `${import.meta.env.BASE_URL}web-app-manifest-192x192.png`,
+    },
+    webAppManifest512: {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '512x512',
+      href: `${import.meta.env.BASE_URL}web-app-manifest-512x512.png`,
     },
   },
   noscript: {
