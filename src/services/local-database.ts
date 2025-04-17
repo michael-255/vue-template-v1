@@ -32,7 +32,7 @@ export class LocalDatabase extends Dexie {
    * overwritten. If the settings do not exist, they are created with default values.
    * @note This MUST be called in `App.vue` on startup
    */
-  async initializeSettingsOnStartup(): Promise<void> {
+  async initializeSettings(): Promise<void> {
     const defaultSettings: {
       [key in SettingIdEnum]: SettingValueType
     } = {
@@ -66,11 +66,11 @@ export class LocalDatabase extends Dexie {
   }
 
   /**
-   * Deletes all logs that are older than the retention time set in the settings. If the
-   * retention time is set to 'Forever', no logs will be deleted.
+   * Deletes all logs that are older than the retention time set in the settings. If the retention
+   * time is set to 'Forever', no logs will be deleted. This should be called on app startup.
    * @returns The number of logs deleted
    */
-  async deleteExpiredLogsOnStartup() {
+  async deleteExpiredLogs() {
     const setting = await this.table(TableEnum.SETTINGS).get(SettingIdEnum.LOG_RETENTION_DURATION)
     const logRetentionDuration = setting?.value as DurationEnum
 

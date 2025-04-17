@@ -2,13 +2,13 @@ import { SettingIdEnum } from '@/shared/enums'
 import type { SettingType } from '@/shared/types'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, type Ref } from 'vue'
 
 export const useBackendStore = defineStore('backend', () => {
   // State
-  const supabase: SupabaseClient = ref(null!)
-  const user: Record<string, any> = ref({})
-  const settings: Record<string, any> = ref({})
+  const supabase: Ref<SupabaseClient> = ref(null!)
+  const user: Ref<Record<string, any>> = ref(null!)
+  const settings: Ref<SettingType[]> = ref([])
 
   // Actions
   // ...
@@ -30,12 +30,12 @@ export const useBackendStore = defineStore('backend', () => {
     return settings.value.find((s: SettingType) => s.id === SettingIdEnum.PROJECT_PUBLIC_KEY)
       ?.value as string
   })
-  const settingsConsoleLogs = computed(() => {
-    return settings.value.find((s: SettingType) => s.id === SettingIdEnum.CONSOLE_LOGS)
-      ?.value as boolean
-  })
   const settingsInfoPopups = computed(() => {
     return settings.value.find((s: SettingType) => s.id === SettingIdEnum.INFO_POPUPS)
+      ?.value as boolean
+  })
+  const settingsConsoleLogs = computed(() => {
+    return settings.value.find((s: SettingType) => s.id === SettingIdEnum.CONSOLE_LOGS)
       ?.value as boolean
   })
   const settingsLogRetentionDuration = computed(() => {
@@ -45,9 +45,9 @@ export const useBackendStore = defineStore('backend', () => {
 
   return {
     // State
-    supabase,
-    user,
-    settings,
+    supabase: supabase.value,
+    user: user.value,
+    settings: settings.value,
     // Actions
     // ...
     // Getters

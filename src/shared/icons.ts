@@ -2,6 +2,7 @@ import { matStar, matStarBorder } from '@quasar/extras/material-icons'
 import {
   symRoundedAdd,
   symRoundedAddCircle,
+  symRoundedArrowBack,
   symRoundedArrowForward,
   symRoundedBugReport,
   symRoundedCalendarToday,
@@ -9,6 +10,7 @@ import {
   symRoundedCheck,
   symRoundedClose,
   symRoundedCode,
+  symRoundedDashboard,
   symRoundedDatabase,
   symRoundedDataTable,
   symRoundedDelete,
@@ -62,12 +64,15 @@ export const errorIcon = symRoundedError
 export const donatePageIcon = symRoundedRedeem
 export const settingsPageIcon = symRoundedSettings
 export const examplesPageIcon = symRoundedSmartToy
+export const dashboardIcon = symRoundedDashboard
+export const settingsIcon = symRoundedSettings
 
 // Tables
 export const logsTableIcon = symRoundedFeatureSearch
 export const settingsTableIcon = symRoundedSettingsApplications
 
 // Actions Types
+export const arrowBackIcon = symRoundedArrowBack
 export const saveIcon = symRoundedSave
 export const topOfPageIcon = symRoundedStat2
 export const searchIcon = symRoundedSearch

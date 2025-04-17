@@ -13,6 +13,7 @@
 export enum RouteNameEnum {
   MENU_LAYOUT = 'MenuLayout',
   DASHBOARD = 'Dashboard',
+  EXAMPLE = 'Example',
   SETTINGS = 'Settings',
   ABOUT = 'About',
   DONATE = 'Donate',

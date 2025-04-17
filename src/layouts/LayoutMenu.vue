@@ -10,7 +10,7 @@ const isDesktop = computed(() => $q.screen.gt.xs)
 
 <template>
   <q-layout view="hHh lpr lfr">
-    <q-header bordered>
+    <q-header class="layout-header-height shadow-1">
       <q-tabs class="text-caption" active-color="yellow" outside-arrows mobile-arrows>
         <q-route-tab no-caps :icon="examplesPageIcon" exact>
           <template v-if="isDesktop">Examples</template>

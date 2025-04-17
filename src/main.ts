@@ -7,7 +7,7 @@ import 'quasar/dist/quasar.css'
 import quasarIconSet from 'quasar/icon-set/material-symbols-rounded'
 import { createApp } from 'vue'
 import App from './App.vue'
-import './assets/main.css'
+import './assets/base.css'
 import router from './router'
 
 const app = createApp(App)

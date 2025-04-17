@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { colors, useMeta } from 'quasar'
+import { colors, useMeta, useQuasar } from 'quasar'
+import { onMounted, onUnmounted } from 'vue'
+import useLogger from './composables/useLogger'
+import { localDatabase } from './services/local-database'
 import { appDescription, appTitle } from './shared/constants'
+import { errorIcon } from './shared/icons'
+import { useBackendStore } from './stores/backend'
 
 /**
  * Do NOT overwrite these specific properties in another useMeta call
@@ -45,6 +50,41 @@ useMeta({
     default:
       'Your browser does not support JavaScript or has it disabled. Please enable JavaScript in your web browser settings or white-list our domain in your JavaScript blocker for the best experience.',
   },
+})
+
+const notify = useQuasar().notify
+const { log } = useLogger()
+const backendStore = useBackendStore()
+
+// Loading live Settings into the store on startup for use throughout the app.
+const subscription = localDatabase.liveSettings().subscribe({
+  next: (records) => (backendStore.settings = records),
+  error: (error) => log.error('Error loading live Settings', error as Error),
+})
+
+onMounted(async () => {
+  try {
+    await localDatabase.initializeSettings()
+  } catch (error) {
+    // Output the error and notify user since it could be a database or logger failure
+    notify({
+      message: 'Error initializing settings',
+      icon: errorIcon,
+      color: 'negative',
+    })
+    console.error(error)
+  }
+
+  try {
+    const logsDeleted = await localDatabase.deleteExpiredLogs()
+    log.silentDebug('Expired logs deleted', { logsDeleted })
+  } catch (error) {
+    log.error('Error deleting expired logs', error as Error)
+  }
+})
+
+onUnmounted(() => {
+  subscription.unsubscribe()
 })
 </script>
 
