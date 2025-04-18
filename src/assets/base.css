@@ -1,3 +1,5 @@
-.layout-header-height {
-  height: 50px;
+/* Standard width for page content */
+.page-width-limit {
+  max-width: 800px;
+  width: 100%;
 }

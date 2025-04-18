@@ -154,9 +154,8 @@ Configure GitHub Pages to deploy using GitHub Actions.
 
 - Update `constants.ts`
 
-  - `appName`
+  - `appTitle`
   - `appDescription`
-  - `appDatabaseVersion`
 
 - Update `~/public/*`
 
