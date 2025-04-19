@@ -1,18 +1,21 @@
 <script setup lang="ts">
+import PageHeading from '@/components/PageHeading.vue'
 import { appTitle } from '@/shared/constants'
-import { settingsIcon } from '@/shared/icons'
+import { infoIcon, settingsIcon } from '@/shared/icons'
 import { useMeta } from 'quasar'
 import { ref, type Ref } from 'vue'
 
-useMeta({ title: `${appTitle} - Settings` })
+useMeta({ title: `${appTitle} | Settings` })
 
 const test: Ref<string> = ref('')
 </script>
 
 <template>
+  <PageHeading :icon="settingsIcon" title="Settings" />
+
   <q-list padding>
     <q-item-label header>
-      <q-icon class="on-left" size="sm" :name="settingsIcon" />
+      <q-icon class="on-left" size="sm" :name="infoIcon" />
       Account
     </q-item-label>
 

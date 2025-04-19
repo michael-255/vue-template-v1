@@ -1,20 +1,63 @@
 <script setup lang="ts">
+import PageHeading from '@/components/PageHeading.vue'
+import { appTitle } from '@/shared/constants'
 import { RouteNameEnum } from '@/shared/enums'
+import { donatePageIcon, examplesPageIcon, gridIcon, settingsIcon } from '@/shared/icons'
+import { useMeta } from 'quasar'
+
+useMeta({ title: `${appTitle} | Dashboard` })
+
+const dashboardButtons = [
+  {
+    label: 'Settings',
+    icon: settingsIcon,
+    color: 'primary',
+    route: { name: RouteNameEnum.SETTINGS },
+  },
+  {
+    label: 'Reports',
+    icon: examplesPageIcon,
+    color: 'secondary',
+    route: { name: RouteNameEnum.EXAMPLE },
+  },
+  {
+    label: 'Donate',
+    icon: donatePageIcon,
+    color: 'accent',
+    route: { name: RouteNameEnum.EXAMPLE },
+  },
+  {
+    label: 'Fitness',
+    icon: gridIcon,
+    color: 'positive',
+    route: { name: RouteNameEnum.EXAMPLE },
+  },
+]
 </script>
 
 <template>
-  <h5>Dashboard</h5>
+  <PageHeading :icon="gridIcon" title="Dashboard" />
 
-  <q-btn
-    color="primary"
-    label="Go to Example"
-    :to="{ name: RouteNameEnum.EXAMPLE }"
-    class="q-mt-md"
-  />
-
-  <p v-for="i in 25" :key="i">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic nihil pariatur doloremque ab,
-    perferendis aperiam unde odit minus sed earum, incidunt, atque ullam vel animi necessitatibus
-    consequatur dolores! Ducimus, quam.
-  </p>
+  <div class="row q-col-gutter-md">
+    <div class="col-6" v-for="button in dashboardButtons" :key="button.label">
+      <q-btn
+        class="dashboard-btn full-width q-py-lg"
+        glossy
+        stack
+        no-caps
+        :color="button.color"
+        :to="button.route"
+      >
+        <q-icon :name="button.icon" size="5rem" />
+        <div class="q-mt-sm text-h6">{{ button.label }}</div>
+      </q-btn>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.dashboard-btn {
+  height: 280;
+  border-radius: 8px;
+}
+</style>

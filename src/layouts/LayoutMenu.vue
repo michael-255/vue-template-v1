@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouteNameEnum } from '@/shared/enums'
-import { debugIcon, errorIcon, examplesPageIcon, infoIcon, warnIcon } from '@/shared/icons'
+import { backIcon, errorIcon, examplesPageIcon, infoIcon, warnIcon } from '@/shared/icons'
 import { useQuasar } from 'quasar'
 import { computed } from 'vue'
 import PageResponsiveRouterView from './base/PageResponsiveRouterView.vue'
@@ -17,10 +17,6 @@ const isDesktop = computed(() => $q.screen.gt.xs)
           <template v-if="isDesktop">Examples</template>
         </q-route-tab>
 
-        <q-route-tab no-caps :icon="debugIcon" exact :to="{ name: RouteNameEnum.EXAMPLE }">
-          <template v-if="isDesktop">Tests</template>
-        </q-route-tab>
-
         <q-route-tab no-caps :icon="infoIcon" exact :to="{ name: RouteNameEnum.EXAMPLE }">
           <template v-if="isDesktop">Information</template>
         </q-route-tab>
@@ -32,6 +28,8 @@ const isDesktop = computed(() => $q.screen.gt.xs)
         <q-route-tab no-caps :icon="errorIcon" exact :to="{ name: RouteNameEnum.EXAMPLE }">
           <template v-if="isDesktop">Errors</template>
         </q-route-tab>
+
+        <q-btn flat stretch :icon="backIcon" :to="{ name: RouteNameEnum.DASHBOARD }" />
       </q-tabs>
     </q-header>
 

@@ -2,7 +2,7 @@
 import { appTitle } from '@/shared/constants'
 import { useMeta } from 'quasar'
 
-useMeta({ title: `${appTitle} - 404 Not Found` })
+useMeta({ title: `${appTitle} | 404 Not Found` })
 </script>
 
 <template>

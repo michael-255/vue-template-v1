@@ -1,7 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import PageHeading from '@/components/PageHeading.vue'
+import { appTitle } from '@/shared/constants'
+import { examplesPageIcon } from '@/shared/icons'
+import { useMeta } from 'quasar'
+
+useMeta({ title: `${appTitle} | Examples` })
+</script>
 
 <template>
-  <h5>Example Home</h5>
+  <PageHeading :icon="examplesPageIcon" title="Examples" />
 
   <p v-for="i in 25" :key="i">
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic nihil pariatur doloremque ab,

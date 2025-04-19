@@ -21,6 +21,7 @@ import {
   symRoundedError,
   symRoundedEventAvailable,
   symRoundedFeatureSearch,
+  symRoundedGridView,
   symRoundedInfo,
   symRoundedKeyboardArrowDown,
   symRoundedKeyboardArrowUp,
@@ -66,6 +67,7 @@ export const settingsPageIcon = symRoundedSettings
 export const examplesPageIcon = symRoundedSmartToy
 export const dashboardIcon = symRoundedDashboard
 export const settingsIcon = symRoundedSettings
+export const gridIcon = symRoundedGridView
 
 // Tables
 export const logsTableIcon = symRoundedFeatureSearch
