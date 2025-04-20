@@ -1,4 +1,4 @@
-import LayoutDashboard from '@/layouts/LayoutDashboard.vue'
+import LayoutEmpty from '@/layouts/LayoutEmpty.vue'
 import LayoutMenu from '@/layouts/LayoutMenu.vue'
 import { RouteNameEnum } from '@/shared/enums'
 import ViewDashboard from '@/views/ViewDashboard.vue'
@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: LayoutDashboard,
+      component: LayoutEmpty,
       children: [
         {
           path: '/',

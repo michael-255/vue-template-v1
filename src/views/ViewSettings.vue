@@ -11,7 +11,7 @@ const test: Ref<string> = ref('')
 </script>
 
 <template>
-  <PageHeading :icon="settingsIcon" title="Settings" />
+  <PageHeading :icon="settingsIcon" title="Settings" :go-back-btn="true" />
 
   <q-list padding>
     <q-item-label header>

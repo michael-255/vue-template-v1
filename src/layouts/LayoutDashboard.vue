@@ -23,7 +23,7 @@ const { goBack } = useRouting()
           flat
           round
           :icon="arrowBackIcon"
-          @click="goBack"
+          @click="goBack()"
         />
         <q-btn
           v-show="$route.name === RouteNameEnum.DASHBOARD"
