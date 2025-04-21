@@ -29,13 +29,16 @@ import {
   symRoundedLibraryAdd,
   symRoundedLock,
   symRoundedLockOpenRight,
+  symRoundedLogout,
   symRoundedManageSearch,
   symRoundedMenu,
   symRoundedMonitoring,
   symRoundedMoreVert,
+  symRoundedPerson,
   symRoundedPublish,
   symRoundedRecommend,
   symRoundedRedeem,
+  symRoundedRefresh,
   symRoundedSave,
   symRoundedSchedule,
   symRoundedSearch,
@@ -44,6 +47,7 @@ import {
   symRoundedSmartToy,
   symRoundedStat2,
   symRoundedStickyNote2,
+  symRoundedStorage,
   symRoundedTune,
   symRoundedViewWeek,
   symRoundedWarning,
@@ -114,3 +118,7 @@ export const calendarIcon = symRoundedCalendarToday
 export const calendarCheckIcon = symRoundedEventAvailable
 export const scheduleTimeIcon = symRoundedSchedule
 export const recommendIcon = symRoundedRecommend
+export const userIcon = symRoundedPerson
+export const logoutIcon = symRoundedLogout
+export const storageIcon = symRoundedStorage
+export const refreshIcon = symRoundedRefresh

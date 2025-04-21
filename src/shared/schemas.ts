@@ -1,11 +1,4 @@
-import {
-  DurationEnum,
-  LogLevelEnum,
-  RouteNameEnum,
-  SettingIdEnum,
-  StatusEnum,
-  TableEnum,
-} from '@/shared/enums'
+import { LogLevelEnum, RouteNameEnum, SettingIdEnum, StatusEnum, TableEnum } from '@/shared/enums'
 import { z } from 'zod'
 
 /**
@@ -45,12 +38,7 @@ export const timestampzSchema = z.string().refine(
 //
 
 export const settingIdSchema = z.nativeEnum(SettingIdEnum)
-export const settingValueSchema = z.union([
-  z.boolean(),
-  z.string(),
-  z.number(),
-  z.nativeEnum(DurationEnum),
-])
+export const settingValueSchema = z.union([z.boolean(), z.string(), z.number()])
 export const settingSchema = z.object({
   id: settingIdSchema, // Instead of standard ID
   value: settingValueSchema,

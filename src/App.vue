@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { colors, useMeta, useQuasar } from 'quasar'
 import { onMounted, onUnmounted } from 'vue'
+import DialogLogin from './components/dialogs/DialogLogin.vue'
 import useLogger from './composables/useLogger'
 import { localDatabase } from './services/local-database'
 import { appDescription, appTitle } from './shared/constants'
 import { errorIcon } from './shared/icons'
-import { useBackendStore } from './stores/backend'
+import { useSettingsStore } from './stores/settings'
 
 /**
  * Do NOT overwrite these specific properties in another useMeta call
@@ -54,11 +55,11 @@ useMeta({
 
 const notify = useQuasar().notify
 const { log } = useLogger()
-const backendStore = useBackendStore()
+const settingsStore = useSettingsStore()
 
 // Loading live Settings into the store on startup for use throughout the app.
 const subscription = localDatabase.liveSettings().subscribe({
-  next: (records) => (backendStore.settings = records),
+  next: (records) => (settingsStore.settings = records),
   error: (error) => log.error('Error loading live Settings', error as Error),
 })
 
@@ -89,5 +90,6 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <DialogLogin />
   <RouterView />
 </template>

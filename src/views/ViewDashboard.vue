@@ -42,7 +42,7 @@ const dashboardButtons = [
 </script>
 
 <template>
-  <PageHeading :icon="gridIcon" title="Dashboard" />
+  <PageHeading :icon="gridIcon" :title="appTitle" />
 
   <div class="row q-col-gutter-md q-pa-sm">
     <div class="col-6" v-for="button in dashboardButtons" :key="button.label">

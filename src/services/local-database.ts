@@ -37,9 +37,8 @@ export class LocalDatabase extends Dexie {
       [key in SettingIdEnum]: SettingValueType
     } = {
       [SettingIdEnum.USER_EMAIL]: '',
-      [SettingIdEnum.USER_PASSWORD]: '',
       [SettingIdEnum.PROJECT_URL]: '',
-      [SettingIdEnum.PROJECT_PUBLIC_KEY]: '',
+      [SettingIdEnum.PROJECT_API_KEY]: '',
       [SettingIdEnum.INFO_POPUPS]: true,
       [SettingIdEnum.CONSOLE_LOGS]: false,
       [SettingIdEnum.LOG_RETENTION_DURATION]: DurationEnum[DurationEnum['Six Months']],

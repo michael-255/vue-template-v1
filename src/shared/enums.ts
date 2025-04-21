@@ -85,9 +85,8 @@ export enum DurationMSEnum {
  */
 export enum SettingIdEnum {
   USER_EMAIL = 'User Email',
-  USER_PASSWORD = 'User Password',
   PROJECT_URL = 'Project URL',
-  PROJECT_PUBLIC_KEY = 'Project API Key',
+  PROJECT_API_KEY = 'Project API Key',
   CONSOLE_LOGS = 'Console Logs',
   INFO_POPUPS = 'Info Popups',
   LOG_RETENTION_DURATION = 'Log Rentention Duration',
