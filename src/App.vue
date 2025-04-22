@@ -6,6 +6,7 @@ import useLogger from './composables/useLogger'
 import { localDatabase } from './services/local-database'
 import { appDescription, appTitle } from './shared/constants'
 import { errorIcon } from './shared/icons'
+import { useBackendStore } from './stores/backend'
 import { useSettingsStore } from './stores/settings'
 
 /**
@@ -56,6 +57,7 @@ useMeta({
 const notify = useQuasar().notify
 const { log } = useLogger()
 const settingsStore = useSettingsStore()
+const backendStore = useBackendStore()
 
 // Loading live Settings into the store on startup for use throughout the app.
 const subscription = localDatabase.liveSettings().subscribe({
@@ -64,6 +66,7 @@ const subscription = localDatabase.liveSettings().subscribe({
 })
 
 onMounted(async () => {
+  // Initializes the local database settings
   try {
     await localDatabase.initializeSettings()
   } catch (error) {
@@ -76,11 +79,33 @@ onMounted(async () => {
     console.error(error)
   }
 
+  // Delete expired logs
   try {
     const logsDeleted = await localDatabase.deleteExpiredLogs()
     log.silentDebug('Expired logs deleted', { logsDeleted })
   } catch (error) {
     log.error('Error deleting expired logs', error as Error)
+  }
+
+  // Initialize Auth
+  try {
+    const client = backendStore.getSupabase()
+
+    const { data: sessionData } = await client.auth.getSession()
+
+    // If there's an active session, get the user from the session
+    if (sessionData?.session?.user) {
+      backendStore.user = sessionData.session.user
+    } else {
+      backendStore.user = null
+    }
+
+    client.auth.onAuthStateChange((_event, session) => {
+      log.info('Auth state changed', { event: _event })
+      backendStore.user = session?.user ?? null
+    })
+  } catch (error) {
+    log.error('Auth Error', error as Error)
   }
 })
 

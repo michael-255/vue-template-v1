@@ -9,6 +9,8 @@ import { z } from 'zod'
 // Shared
 //
 
+export const urlSchema = z.string().url()
+export const emailSchema = z.string().email()
 export const tableSchema = z.nativeEnum(TableEnum)
 export const routeNameSchema = z.nativeEnum(RouteNameEnum)
 export const idSchema = z.string().refine(

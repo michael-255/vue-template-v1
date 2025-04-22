@@ -4,8 +4,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## TODO
 
-- Get the Supabase client to initialize and manage User login
-- Route guards on the `Apps` that confirm that a User is logged in
+- Route guards on the `Apps` that confirm that a User is logged in?
 - Break up `utils` into files for specific utility types?
   - Clean up and remove some utils?
 

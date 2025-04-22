@@ -21,8 +21,9 @@ import {
   userIcon,
   warnIcon,
 } from '@/shared/icons'
+import { useBackendStore } from '@/stores/backend'
 import { useSettingsStore } from '@/stores/settings'
-import { useMeta, useQuasar } from 'quasar'
+import { QSpinnerGears, useMeta, useQuasar } from 'quasar'
 import { useRouter } from 'vue-router'
 
 useMeta({ title: `${appTitle} | Settings` })
@@ -31,6 +32,7 @@ const $q = useQuasar()
 const { log } = useLogger()
 const router = useRouter()
 const settingsStore = useSettingsStore()
+const backendStore = useBackendStore()
 
 const isDevMode = import.meta.env.DEV
 
@@ -52,15 +54,14 @@ function onLogout() {
     componentProps: {
       title: 'Logout',
       message: 'Are you sure you want to logout?',
-      color: 'warning',
+      color: 'primary',
       icon: logoutIcon,
       requiresUnlock: false,
     },
   }).onOk(async () => {
     try {
       $q.loading.show()
-      // TODO: Logout user
-      // await supabase.auth.signOut()
+      await backendStore.logout()
       log.info('Successfully logged out')
     } catch (error) {
       log.error('Error logging out', error as Error)
@@ -87,8 +88,7 @@ function onResetSettings() {
   }).onOk(async () => {
     try {
       $q.loading.show()
-      // TODO: Logout user
-      // await supabase.auth.signOut()
+      await backendStore.logout()
       await localDatabase.table(TableEnum.SETTINGS).clear()
       await localDatabase.initializeSettings()
       log.info('Successfully reset Settings')
@@ -161,7 +161,10 @@ function onDeleteLocalDatabase() {
  * Generates test logs for the application. Only available in development mode.
  */
 function onTestLogs() {
-  $q.loading.show()
+  $q.loading.show({
+    message: 'Testing Logs',
+    spinner: QSpinnerGears,
+  })
 
   const testData = {
     userId: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
@@ -191,18 +194,18 @@ function onTestLogs() {
       User
     </q-item-label>
 
-    <div>
+    <div v-if="backendStore.isAuthenticated">
       <q-item>
         <q-item-section top>
           <q-item-label>Email</q-item-label>
-          <q-item-label caption> very-log-email-address@test.com </q-item-label>
+          <q-item-label caption> {{ backendStore.user?.email }} </q-item-label>
         </q-item-section>
       </q-item>
 
       <q-item>
         <q-item-section top>
           <q-item-label>Id</q-item-label>
-          <q-item-label caption> f47ac10b-58cc-4372-a567-0e02b2c3d479 </q-item-label>
+          <q-item-label caption> {{ backendStore.user?.id }} </q-item-label>
         </q-item-section>
       </q-item>
 
@@ -217,12 +220,12 @@ function onTestLogs() {
       </q-item>
     </div>
 
-    <q-item>
+    <q-item v-else>
       <q-btn
         :disable="$q.loading.isActive"
         :icon="loginIcon"
         color="primary"
-        label="Goto Login"
+        label="Login"
         @click="
           localDatabase.table(TableEnum.SETTINGS).put({
             id: SettingIdEnum.LOGIN_DIALOG,
