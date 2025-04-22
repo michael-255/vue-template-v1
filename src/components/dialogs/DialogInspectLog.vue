@@ -30,7 +30,7 @@ const { dialogRef, onDialogHide, onDialogCancel } = useDialogPluginComponent()
     <q-card class="q-dialog-plugin">
       <q-card-section>
         <div class="row justify-center">
-          <div class="responsive-container">
+          <div class="page-width-limit">
             <q-list padding>
               <div v-if="record">
                 <InspectItemText label="Id" field="id" :record />
@@ -51,9 +51,5 @@ const { dialogRef, onDialogHide, onDialogCancel } = useDialogPluginComponent()
 <style scoped>
 .toolbar-height {
   max-height: 50px;
-}
-.responsive-container {
-  width: 100%;
-  max-width: 800px;
 }
 </style>
