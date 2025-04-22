@@ -36,6 +36,7 @@ export class LocalDatabase extends Dexie {
     const defaultSettings: {
       [key in SettingIdEnum]: SettingValueType
     } = {
+      [SettingIdEnum.LOGIN_DIALOG]: false,
       [SettingIdEnum.USER_EMAIL]: '',
       [SettingIdEnum.PROJECT_URL]: '',
       [SettingIdEnum.PROJECT_API_KEY]: '',

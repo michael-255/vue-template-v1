@@ -15,6 +15,8 @@ export enum RouteNameEnum {
   DASHBOARD = 'Dashboard',
   EXAMPLE = 'Example',
   SETTINGS = 'Settings',
+  SETTINGS_TABLE = 'SettingsTable',
+  LOGS_TABLE = 'LogsTable',
   ABOUT = 'About',
   DONATE = 'Donate',
   NOT_FOUND = 'NotFound',
@@ -26,15 +28,6 @@ export enum RouteNameEnum {
 export enum TableEnum {
   SETTINGS = 'settings', // Standalone
   LOGS = 'logs', // Standalone
-}
-
-/**
- * Status indicators used to modify how the app treats a record with it.
- */
-export enum StatusEnum {
-  LOCKED = 'Locked', // Shared - No user interaction allowed
-  HIDDEN = 'Hidden', // Parent
-  FAVORITED = 'Favorited', // Parent
 }
 
 export enum LimitEnum {
@@ -84,6 +77,7 @@ export enum DurationMSEnum {
  * The only valid IDs for settings in the application.
  */
 export enum SettingIdEnum {
+  LOGIN_DIALOG = 'Login Dialog',
   USER_EMAIL = 'User Email',
   PROJECT_URL = 'Project URL',
   PROJECT_API_KEY = 'Project API Key',

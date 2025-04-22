@@ -14,7 +14,7 @@ interface LogParams {
 }
 
 /**
- * Log model primarily used for local storage of logs.
+ * Log stored in the local browser databse for the app.
  */
 export class Log {
   id: IdType

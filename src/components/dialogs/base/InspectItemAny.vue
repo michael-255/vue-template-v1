@@ -1,0 +1,20 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import BaseInspectItem from './BaseInspectItem.vue'
+
+const props = defineProps<{
+  label: string
+  field: string
+  record: Record<string, any>
+}>()
+
+const value = computed(() => {
+  return props.record[props.field]
+})
+</script>
+
+<template>
+  <BaseInspectItem :label="label">
+    {{ value }}
+  </BaseInspectItem>
+</template>

@@ -29,6 +29,10 @@ export const useSettingsStore = defineStore('settings', {
         ?.value as string
     },
     // Internal
+    loginDialog: (state) => {
+      return state.settings.find((s: SettingType) => s.id === SettingIdEnum.LOGIN_DIALOG)
+        ?.value as boolean
+    },
     consoleLogs: (state) => {
       return state.settings.find((s: SettingType) => s.id === SettingIdEnum.CONSOLE_LOGS)
         ?.value as boolean

@@ -31,7 +31,15 @@ export function hiddenTableColumn(rowPropertyName: string): QTableColumn {
 export function tableColumn(
   rowPropertyName: string,
   label: string,
-  format?: 'UUID' | 'TEXT' | 'BOOL' | 'JSON' | 'DATE' | 'LIST-COUNT' | 'LIST-PRINT' | 'SETTING',
+  format?:
+    | 'UUID'
+    | 'TEXT'
+    | 'BOOL'
+    | 'OBJECT'
+    | 'ISO-DATE'
+    | 'LIST-COUNT'
+    | 'LIST-PRINT'
+    | 'SETTING',
 ): QTableColumn {
   // Initial column properties
   const tableColumn: QTableColumn = {
@@ -57,17 +65,17 @@ export function tableColumn(
       // Converts output to a Yes or No string
       tableColumn.format = (val: boolean) => (val ? 'Yes' : 'No')
       return tableColumn
-    case 'JSON':
+    case 'OBJECT':
       // Converts to JSON and truncates so it won't overflow the table cell
       tableColumn.format = (val: Record<string, string>) =>
         truncateText(JSON.stringify(val), 40, '...')
       return tableColumn
-    case 'DATE':
+    case 'ISO-DATE':
       // Converts to a compact date string
-      tableColumn.format = (val: number) => compactDateFromMs(val)
+      tableColumn.format = (val: string) => compactDateFromISODate(val)
       return tableColumn
     case 'LIST-COUNT':
-      // Converts list to a count of the items
+      // Converts list to a count of the number of items
       tableColumn.format = (val: any[]) => `${val?.length ? val.length : 0}`
       return tableColumn
     case 'LIST-PRINT':
@@ -87,7 +95,7 @@ export function tableColumn(
       }
       return tableColumn
     default:
-      // STRING: Default just converts the result to a string as is with no length limit
+      // STRING: Default just converts the result to a string with no length limit
       return tableColumn
   }
 }
@@ -151,6 +159,18 @@ export function compactDateFromMs(milliseconds: number | null | undefined) {
     return ''
   }
   return date.formatDate(milliseconds, 'ddd, YYYY MMM Do, h:mm A')
+}
+
+/**
+ * Compact readable date string from an ISO date string or an `Invalid Date` string.
+ * @param isoDate ISO date string
+ * @returns `Sat, 2021 Jan 2nd, 12:00 PM`
+ */
+export function compactDateFromISODate(isoDate?: string) {
+  if (!isoDate) {
+    return 'Invalid Date'
+  }
+  return date.formatDate(new Date(isoDate), 'ddd, YYYY MMM Do, h:mm A')
 }
 
 /**

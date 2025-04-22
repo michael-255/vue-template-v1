@@ -4,7 +4,7 @@ import { appTitle } from '@/shared/constants'
 import { LogLevelEnum, TableEnum } from '@/shared/enums'
 import { debugIcon, errorIcon, infoIcon, warnIcon } from '@/shared/icons'
 import type { LogDetailsType } from '@/shared/types'
-import { useBackendStore } from '@/stores/backend'
+import { useSettingsStore } from '@/stores/settings'
 import { colors, useQuasar } from 'quasar'
 
 /**
@@ -22,7 +22,7 @@ export default function useLogger() {
     error: `${baseStyle} ${colors.getPaletteColor('negative')};`,
   }
 
-  const backendStore = useBackendStore() // Use the Pinia settings store
+  const settingsStore = useSettingsStore()
 
   const log = {
     /**
@@ -49,7 +49,7 @@ export default function useLogger() {
     },
 
     info: async (name: string, details?: LogDetailsType) => {
-      if (backendStore.settingsConsoleLogs) {
+      if (settingsStore.consoleLogs) {
         console.log(loggerName, style.info, `[${LogLevelEnum.INFO}]`, name, details)
       }
       const log = new Log({
@@ -58,13 +58,13 @@ export default function useLogger() {
         details,
       })
       await localDatabase.table(TableEnum.LOGS).add(log)
-      if (backendStore.settingsInfoPopups) {
+      if (settingsStore.infoPopus) {
         notify({ message: name, icon: infoIcon, color: 'info' })
       }
     },
 
     warn: async (name: string, details?: LogDetailsType) => {
-      if (backendStore.settingsConsoleLogs) {
+      if (settingsStore.consoleLogs) {
         console.warn(loggerName, style.warn, `[${LogLevelEnum.WARN}]`, name, details)
       }
       const log = new Log({
@@ -77,7 +77,7 @@ export default function useLogger() {
     },
 
     error: async (name: string, details?: LogDetailsType) => {
-      if (backendStore.settingsConsoleLogs) {
+      if (settingsStore.consoleLogs) {
         console.error(loggerName, style.error, `[${LogLevelEnum.ERROR}]`, name, details)
       }
       const log = new Log({

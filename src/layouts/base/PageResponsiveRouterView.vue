@@ -13,7 +13,6 @@ import { topOfPageIcon } from '@/shared/icons'
       <div class="row justify-center">
         <div class="page-width-limit">
           <RouterView />
-          <div class="q-mt-xl" />
         </div>
       </div>
 

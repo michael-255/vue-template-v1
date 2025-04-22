@@ -29,6 +29,7 @@ import {
   symRoundedLibraryAdd,
   symRoundedLock,
   symRoundedLockOpenRight,
+  symRoundedLogin,
   symRoundedLogout,
   symRoundedManageSearch,
   symRoundedMenu,
@@ -119,6 +120,9 @@ export const calendarCheckIcon = symRoundedEventAvailable
 export const scheduleTimeIcon = symRoundedSchedule
 export const recommendIcon = symRoundedRecommend
 export const userIcon = symRoundedPerson
+export const loginIcon = symRoundedLogin
 export const logoutIcon = symRoundedLogout
 export const storageIcon = symRoundedStorage
 export const refreshIcon = symRoundedRefresh
+export const logsIcon = symRoundedFeatureSearch
+export const settings2Icon = symRoundedSettingsApplications

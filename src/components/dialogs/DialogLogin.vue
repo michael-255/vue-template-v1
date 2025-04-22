@@ -1,17 +1,34 @@
 <script setup lang="ts">
+import { localDatabase } from '@/services/local-database'
 import { appTitle } from '@/shared/constants'
+import { SettingIdEnum, TableEnum } from '@/shared/enums'
+import { useSettingsStore } from '@/stores/settings'
 import { ref } from 'vue'
 
-const showLoginDialog = ref(true)
+const settingsStore = useSettingsStore()
+
 const text = ref('')
 
 async function onCloseLoginDialog() {
-  showLoginDialog.value = false
+  await localDatabase.table(TableEnum.SETTINGS).put({
+    id: SettingIdEnum.LOGIN_DIALOG,
+    value: false,
+  })
 }
 </script>
 
 <template>
-  <q-dialog v-model="showLoginDialog" persistent v-on:keyup.enter="onCloseLoginDialog()">
+  <q-dialog
+    :model-value="Boolean(settingsStore.loginDialog)"
+    @update:model-value="
+      localDatabase.table(TableEnum.SETTINGS).put({
+        id: SettingIdEnum.LOGIN_DIALOG,
+        value: true,
+      })
+    "
+    persistent
+    v-on:keyup.enter="onCloseLoginDialog()"
+  >
     <q-card flat bordered class="auth-dialog-width">
       <q-card-section class="text-h6"> {{ appTitle }} </q-card-section>
 

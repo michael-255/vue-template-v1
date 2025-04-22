@@ -40,6 +40,17 @@ const router = createRouter({
         },
       ],
     },
+    // Fullscreen tables cannot use layouts
+    {
+      path: '/settings-table',
+      name: RouteNameEnum.SETTINGS_TABLE,
+      component: () => import('@/views/ViewTableSettings.vue'),
+    },
+    {
+      path: '/logs-table',
+      name: RouteNameEnum.LOGS_TABLE,
+      component: () => import('@/views/ViewTableLogs.vue'),
+    },
   ],
 })
 

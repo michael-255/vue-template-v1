@@ -1,4 +1,4 @@
-import { LogLevelEnum, RouteNameEnum, SettingIdEnum, StatusEnum, TableEnum } from '@/shared/enums'
+import { LogLevelEnum, RouteNameEnum, SettingIdEnum, TableEnum } from '@/shared/enums'
 import { z } from 'zod'
 
 /**
@@ -11,7 +11,6 @@ import { z } from 'zod'
 
 export const tableSchema = z.nativeEnum(TableEnum)
 export const routeNameSchema = z.nativeEnum(RouteNameEnum)
-export const statusSchema = z.nativeEnum(StatusEnum)
 export const idSchema = z.string().refine(
   (id) => {
     if (z.string().uuid().safeParse(id).success) {

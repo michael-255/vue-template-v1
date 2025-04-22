@@ -5,5 +5,6 @@ import PageResponsiveRouterView from './base/PageResponsiveRouterView.vue'
 <template>
   <q-layout view="hHh lpr lfr">
     <PageResponsiveRouterView />
+    <q-space class="q-my-xl" />
   </q-layout>
 </template>
