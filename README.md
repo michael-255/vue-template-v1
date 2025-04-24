@@ -4,9 +4,11 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## TODO
 
-- Route guards on the `Apps` that confirm that a User is logged in?
+- Clean up `icons.ts`
 - Break up `utils` into files for specific utility types?
   - Clean up and remove some utils?
+  - Add tests back for utils and run them in the GH workflow
+- Route guards on the `Apps` that confirm that a User is logged in?
 
 ## Project Setup
 

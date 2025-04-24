@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import DialogInspectSetting from '@/components/dialogs/DialogInspectSetting.vue'
 import useLogger from '@/composables/useLogger'
-import useRouting from '@/composables/useRouting'
 import { localDatabase } from '@/services/local-database'
 import { appTitle } from '@/shared/constants'
+import { RouteNameEnum } from '@/shared/enums'
 import { closeIcon, settings2Icon } from '@/shared/icons'
 import type { SettingType } from '@/shared/types'
 import { recordsCount, tableColumn, visibleColumnsFromTableColumns } from '@/shared/utils'
@@ -13,7 +13,6 @@ import { onUnmounted, ref, type Ref } from 'vue'
 useMeta({ title: `${appTitle} | View Settings` })
 
 const $q = useQuasar()
-const { goBack } = useRouting()
 const { log } = useLogger()
 
 const labelSingular = 'Setting'
@@ -90,7 +89,7 @@ onUnmounted(() => {
           flat
           class="absolute-top-right q-mr-sm q-mt-sm"
           :icon="closeIcon"
-          @click="goBack"
+          :to="{ name: RouteNameEnum.SETTINGS }"
         />
       </div>
 

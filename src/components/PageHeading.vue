@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import useRouting from '@/composables/useRouting'
-import { arrowBackIcon } from '@/shared/icons'
-
 defineProps<{
   icon: string
   title: string
-  goBackBtn?: boolean
 }>()
-
-const { goBack } = useRouting()
 </script>
 
 <template>
@@ -18,7 +12,7 @@ const { goBack } = useRouting()
       {{ title }}
     </q-toolbar-title>
 
-    <q-btn v-if="goBackBtn" flat round :icon="arrowBackIcon" @click="goBack()" />
+    <slot />
   </q-toolbar>
 
   <q-separator class="q-mb-sm" />

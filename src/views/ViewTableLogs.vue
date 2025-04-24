@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import DialogInspectLog from '@/components/dialogs/DialogInspectLog.vue'
 import useLogger from '@/composables/useLogger'
-import useRouting from '@/composables/useRouting'
 import { localDatabase } from '@/services/local-database'
 import { appTitle } from '@/shared/constants'
+import { RouteNameEnum } from '@/shared/enums'
 import { closeIcon, columnsIcon, logsIcon, searchIcon } from '@/shared/icons'
 import type { LogType } from '@/shared/types'
 import {
@@ -19,7 +19,6 @@ import { onUnmounted, ref, type Ref } from 'vue'
 useMeta({ title: `${appTitle} | View Logs` })
 
 const $q = useQuasar()
-const { goBack } = useRouting()
 const { log } = useLogger()
 
 const labelSingular = 'Log'
@@ -109,7 +108,7 @@ onUnmounted(() => {
           flat
           class="absolute-top-right q-mr-sm q-mt-sm"
           :icon="closeIcon"
-          @click="goBack"
+          :to="{ name: RouteNameEnum.SETTINGS }"
         />
       </div>
 

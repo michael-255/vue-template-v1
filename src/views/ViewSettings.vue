@@ -6,6 +6,7 @@ import { localDatabase } from '@/services/local-database'
 import { appTitle } from '@/shared/constants'
 import { DurationEnum, LocalTableEnum, RouteNameEnum, SettingIdEnum } from '@/shared/enums'
 import {
+  closeIcon,
   createIcon,
   debugIcon,
   deleteIcon,
@@ -333,7 +334,9 @@ function onTestLogs() {
 </script>
 
 <template>
-  <PageHeading :icon="settingsIcon" title="Settings" :go-back-btn="true" />
+  <PageHeading :icon="settingsIcon" title="Settings">
+    <q-btn round flat :icon="closeIcon" :to="{ name: RouteNameEnum.DASHBOARD }" />
+  </PageHeading>
 
   <q-list padding>
     <q-item-label header>
