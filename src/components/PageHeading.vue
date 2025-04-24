@@ -12,7 +12,7 @@ const { goBack } = useRouting()
 </script>
 
 <template>
-  <q-toolbar class="bg-transparent text-white q-pr-xs">
+  <q-toolbar class="q-pr-xs">
     <q-toolbar-title>
       <q-icon class="on-left q-pb-xs" :name="icon" />
       {{ title }}

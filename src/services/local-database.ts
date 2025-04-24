@@ -1,7 +1,7 @@
 import { Log } from '@/models/Log'
 import { Setting } from '@/models/Setting'
 import { appTitle } from '@/shared/constants'
-import { DurationEnum, DurationMSEnum, SettingIdEnum, TableEnum } from '@/shared/enums'
+import { DurationEnum, DurationMSEnum, LocalTableEnum, SettingIdEnum } from '@/shared/enums'
 import { timestampzSchema } from '@/shared/schemas'
 import type { LogType, SettingType, SettingValueType } from '@/shared/types'
 import Dexie, { liveQuery, type Observable, type Table } from 'dexie'
@@ -12,19 +12,19 @@ import Dexie, { liveQuery, type Observable, type Table } from 'dexie'
  */
 export class LocalDatabase extends Dexie {
   // Required for easier TypeScript usage
-  [TableEnum.SETTINGS]!: Table<Setting>;
-  [TableEnum.LOGS]!: Table<Log>
+  [LocalTableEnum.SETTINGS]!: Table<Setting>;
+  [LocalTableEnum.LOGS]!: Table<Log>
 
   constructor(name: string) {
     super(name)
 
     this.version(1).stores({
-      [TableEnum.SETTINGS]: '&id',
-      [TableEnum.LOGS]: '&id, created_at',
+      [LocalTableEnum.SETTINGS]: '&id',
+      [LocalTableEnum.LOGS]: '&id, created_at',
     })
 
-    this[TableEnum.SETTINGS].mapToClass(Setting)
-    this[TableEnum.LOGS].mapToClass(Log)
+    this[LocalTableEnum.SETTINGS].mapToClass(Setting)
+    this[LocalTableEnum.LOGS].mapToClass(Log)
   }
 
   /**
@@ -40,8 +40,9 @@ export class LocalDatabase extends Dexie {
       [SettingIdEnum.USER_EMAIL]: '',
       [SettingIdEnum.PROJECT_URL]: '',
       [SettingIdEnum.PROJECT_API_KEY]: '',
-      [SettingIdEnum.INFO_POPUPS]: true,
+      [SettingIdEnum.DARK_MODE]: true,
       [SettingIdEnum.CONSOLE_LOGS]: false,
+      [SettingIdEnum.INFO_POPUPS]: false,
       [SettingIdEnum.LOG_RETENTION_DURATION]: DurationEnum[DurationEnum['Six Months']],
     }
 
@@ -50,7 +51,7 @@ export class LocalDatabase extends Dexie {
     // Get all settings or create them with default values
     const settings = await Promise.all(
       settingids.map(async (id) => {
-        const setting = await this.table(TableEnum.SETTINGS).get(id)
+        const setting = await this.table(LocalTableEnum.SETTINGS).get(id)
         if (setting) {
           return setting
         } else {
@@ -62,7 +63,7 @@ export class LocalDatabase extends Dexie {
       }),
     )
 
-    await Promise.all(settings.map((setting) => this.table(TableEnum.SETTINGS).put(setting)))
+    await Promise.all(settings.map((setting) => this.table(LocalTableEnum.SETTINGS).put(setting)))
   }
 
   /**
@@ -71,14 +72,16 @@ export class LocalDatabase extends Dexie {
    * @returns The number of logs deleted
    */
   async deleteExpiredLogs() {
-    const setting = await this.table(TableEnum.SETTINGS).get(SettingIdEnum.LOG_RETENTION_DURATION)
+    const setting = await this.table(LocalTableEnum.SETTINGS).get(
+      SettingIdEnum.LOG_RETENTION_DURATION,
+    )
     const logRetentionDuration = setting?.value as DurationEnum
 
     if (!logRetentionDuration || logRetentionDuration === DurationEnum.Forever) {
       return 0 // No logs purged
     }
 
-    const allLogs = await this.table(TableEnum.LOGS).toArray()
+    const allLogs = await this.table(LocalTableEnum.LOGS).toArray()
     const maxLogAgeMs = DurationMSEnum[logRetentionDuration]
     const now = Date.now()
 
@@ -95,7 +98,7 @@ export class LocalDatabase extends Dexie {
       })
       .map((log: LogType) => log.id) // Map remaining Log ids for removal
 
-    await this.table(TableEnum.LOGS).bulkDelete(removableLogs)
+    await this.table(LocalTableEnum.LOGS).bulkDelete(removableLogs)
     return removableLogs.length // Number of logs deleted
   }
 
@@ -105,7 +108,9 @@ export class LocalDatabase extends Dexie {
    * changes.
    */
   liveLogs(): Observable<LogType[]> {
-    return liveQuery(() => this.table(TableEnum.LOGS).orderBy('created_at').reverse().toArray())
+    return liveQuery(() =>
+      this.table(LocalTableEnum.LOGS).orderBy('created_at').reverse().toArray(),
+    )
   }
 
   /**
@@ -114,7 +119,7 @@ export class LocalDatabase extends Dexie {
    * changes.
    */
   liveSettings(): Observable<SettingType[]> {
-    return liveQuery(() => this.table(TableEnum.SETTINGS).toArray())
+    return liveQuery(() => this.table(LocalTableEnum.SETTINGS).toArray())
   }
 }
 

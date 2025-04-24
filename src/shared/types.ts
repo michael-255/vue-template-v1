@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import type {
   idSchema,
+  localTableSchema,
   logDetailsSchema,
   logLabelSchema,
   logLevelSchema,
@@ -18,8 +19,7 @@ import type {
 //
 
 export type BackupType = {
-  appName: string
-  databaseVersion: string
+  appTitle: string
   createdAt: TimestampzType
   settings: SettingType[]
   logs: LogType[]
@@ -29,6 +29,7 @@ export type BackupType = {
 // Shared
 //
 
+export type LocalTableType = z.infer<typeof localTableSchema>
 export type TableType = z.infer<typeof tableSchema>
 export type RouteNameType = z.infer<typeof routeNameSchema>
 export type IdType = z.infer<typeof idSchema>

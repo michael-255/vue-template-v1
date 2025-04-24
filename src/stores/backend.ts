@@ -13,7 +13,7 @@ export const useBackendStore = defineStore('backend', {
      * Ensures that the Supabase client is initialized and returns it.
      */
     getSupabase() {
-      // Return existing Supabase client
+      // Return existing Supabase client if found
       if (this.supabase) {
         return this.supabase
       }

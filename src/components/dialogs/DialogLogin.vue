@@ -2,12 +2,14 @@
 import useLogger from '@/composables/useLogger'
 import { localDatabase } from '@/services/local-database'
 import { appTitle } from '@/shared/constants'
-import { SettingIdEnum, TableEnum } from '@/shared/enums'
+import { LocalTableEnum, SettingIdEnum } from '@/shared/enums'
+import { closeIcon } from '@/shared/icons'
 import { emailSchema, urlSchema } from '@/shared/schemas'
 import { useBackendStore } from '@/stores/backend'
 import { useSettingsStore } from '@/stores/settings'
 import { QSpinnerGears, useQuasar } from 'quasar'
 import { ref } from 'vue'
+import DialogConfirm from './DialogConfirm.vue'
 
 const $q = useQuasar()
 const { log } = useLogger()
@@ -18,7 +20,7 @@ const password = ref('')
 const isFormValid = ref(true)
 
 /**
- *
+ * Log the user into the Supabase backend.
  */
 async function onLogin() {
   try {
@@ -35,7 +37,7 @@ async function onLogin() {
     })
 
     // Close the login dialog
-    await localDatabase.table(TableEnum.SETTINGS).put({
+    await localDatabase.table(LocalTableEnum.SETTINGS).put({
       id: SettingIdEnum.LOGIN_DIALOG,
       value: false,
     })
@@ -46,13 +48,35 @@ async function onLogin() {
     $q.loading.hide()
   }
 }
+
+/**
+ * Cancels the login if the user wants to remain logged outwhile using parts of the app.
+ */
+async function onCancelLogin() {
+  $q.dialog({
+    component: DialogConfirm,
+    componentProps: {
+      title: 'Cancel Login',
+      message:
+        "The application will not function correctly if you don't login. Are you sure you want to continue?",
+      color: 'negative',
+      icon: closeIcon,
+      requiresUnlock: false,
+    },
+  }).onOk(async () => {
+    await localDatabase.table(LocalTableEnum.SETTINGS).put({
+      id: SettingIdEnum.LOGIN_DIALOG,
+      value: false,
+    })
+  })
+}
 </script>
 
 <template>
   <q-dialog
     :model-value="Boolean(settingsStore.loginDialog)"
     @update:model-value="
-      localDatabase.table(TableEnum.SETTINGS).put({
+      localDatabase.table(LocalTableEnum.SETTINGS).put({
         id: SettingIdEnum.LOGIN_DIALOG,
         value: true,
       })
@@ -66,14 +90,19 @@ async function onLogin() {
         @validation-error="isFormValid = false"
         @validation-success="isFormValid = true"
       >
-        <q-card-section class="text-h6"> {{ appTitle }} </q-card-section>
+        <q-toolbar class="q-pr-xs">
+          <q-toolbar-title>
+            {{ appTitle }}
+          </q-toolbar-title>
+
+          <q-btn flat round :icon="closeIcon" @click="onCancelLogin()" />
+        </q-toolbar>
 
         <q-card-section>
           <q-input
-            outlined
             :model-value="settingsStore.projectUrl"
             @update:model-value="
-              localDatabase.table(TableEnum.SETTINGS).put({
+              localDatabase.table(LocalTableEnum.SETTINGS).put({
                 id: SettingIdEnum.PROJECT_URL,
                 value: $event,
               })
@@ -83,30 +112,32 @@ async function onLogin() {
               (val: string) => urlSchema.safeParse(val).success || 'Project URL is not valid',
             ]"
             :disable="$q.loading.isActive"
+            outlined
+            clearable
             type="text"
             label="Project URL"
           />
 
           <q-input
-            outlined
             :model-value="settingsStore.projectApiKey"
             @update:model-value="
-              localDatabase.table(TableEnum.SETTINGS).put({
+              localDatabase.table(LocalTableEnum.SETTINGS).put({
                 id: SettingIdEnum.PROJECT_API_KEY,
                 value: $event,
               })
             "
             :rules="[(val: string) => val?.length > 0 || 'Project API Key is required']"
             :disable="$q.loading.isActive"
+            outlined
+            clearable
             type="text"
             label="Project API Key"
           />
 
           <q-input
-            outlined
             :model-value="settingsStore.userEmail"
             @update:model-value="
-              localDatabase.table(TableEnum.SETTINGS).put({
+              localDatabase.table(LocalTableEnum.SETTINGS).put({
                 id: SettingIdEnum.USER_EMAIL,
                 value: $event,
               })
@@ -116,15 +147,18 @@ async function onLogin() {
               (val: string) => emailSchema.safeParse(val).success || 'Email is not valid',
             ]"
             :disable="$q.loading.isActive"
+            outlined
+            clearable
             type="email"
             label="Email"
           />
 
           <q-input
-            outlined
             v-model="password"
             :rules="[(val: string) => val?.length > 0 || 'Password is required']"
             :disable="$q.loading.isActive"
+            outlined
+            clearable
             type="password"
             label="Password"
           />

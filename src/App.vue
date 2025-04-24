@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { colors, useMeta, useQuasar } from 'quasar'
-import { onMounted, onUnmounted } from 'vue'
+import { colors, Dark, useMeta, useQuasar } from 'quasar'
+import { onMounted, onUnmounted, watch } from 'vue'
 import DialogLogin from './components/dialogs/DialogLogin.vue'
 import useLogger from './composables/useLogger'
 import { localDatabase } from './services/local-database'
@@ -112,6 +112,14 @@ onMounted(async () => {
 onUnmounted(() => {
   subscription.unsubscribe()
 })
+
+// Watch for dark mode changes from the settings store getter
+watch(
+  () => settingsStore.darkMode,
+  (newDarkMode) => {
+    Dark.set(newDarkMode)
+  },
+)
 </script>
 
 <template>

@@ -1,4 +1,10 @@
-import { LogLevelEnum, RouteNameEnum, SettingIdEnum, TableEnum } from '@/shared/enums'
+import {
+  LocalTableEnum,
+  LogLevelEnum,
+  RouteNameEnum,
+  SettingIdEnum,
+  TableEnum,
+} from '@/shared/enums'
 import { z } from 'zod'
 
 /**
@@ -11,6 +17,7 @@ import { z } from 'zod'
 
 export const urlSchema = z.string().url()
 export const emailSchema = z.string().email()
+export const localTableSchema = z.nativeEnum(LocalTableEnum)
 export const tableSchema = z.nativeEnum(TableEnum)
 export const routeNameSchema = z.nativeEnum(RouteNameEnum)
 export const idSchema = z.string().refine(

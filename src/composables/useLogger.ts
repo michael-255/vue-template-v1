@@ -1,7 +1,7 @@
 import { Log } from '@/models/Log'
 import { localDatabase } from '@/services/local-database'
 import { appTitle } from '@/shared/constants'
-import { LogLevelEnum, TableEnum } from '@/shared/enums'
+import { LocalTableEnum, LogLevelEnum } from '@/shared/enums'
 import { debugIcon, errorIcon, infoIcon, warnIcon } from '@/shared/icons'
 import type { LogDetailsType } from '@/shared/types'
 import { useSettingsStore } from '@/stores/settings'
@@ -57,7 +57,7 @@ export default function useLogger() {
         label: name,
         details,
       })
-      await localDatabase.table(TableEnum.LOGS).add(log)
+      await localDatabase.table(LocalTableEnum.LOGS).add(log)
       if (settingsStore.infoPopus) {
         notify({ message: name, icon: infoIcon, color: 'info' })
       }
@@ -72,7 +72,7 @@ export default function useLogger() {
         label: name,
         details,
       })
-      await localDatabase.table(TableEnum.LOGS).add(log)
+      await localDatabase.table(LocalTableEnum.LOGS).add(log)
       notify({ message: name, icon: warnIcon, color: 'warning' })
     },
 
@@ -85,7 +85,7 @@ export default function useLogger() {
         label: name,
         details,
       })
-      await localDatabase.table(TableEnum.LOGS).add(log)
+      await localDatabase.table(LocalTableEnum.LOGS).add(log)
       notify({ message: name, icon: errorIcon, color: 'negative' })
     },
   }

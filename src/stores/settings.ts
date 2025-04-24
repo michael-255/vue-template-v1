@@ -28,9 +28,13 @@ export const useSettingsStore = defineStore('settings', {
       return state.settings.find((s: SettingType) => s.id === SettingIdEnum.PROJECT_API_KEY)
         ?.value as string
     },
-    // Internal
+    // App
     loginDialog: (state) => {
       return state.settings.find((s: SettingType) => s.id === SettingIdEnum.LOGIN_DIALOG)
+        ?.value as boolean
+    },
+    darkMode: (state) => {
+      return state.settings.find((s: SettingType) => s.id === SettingIdEnum.DARK_MODE)
         ?.value as boolean
     },
     consoleLogs: (state) => {

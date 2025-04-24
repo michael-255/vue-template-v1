@@ -13,6 +13,7 @@ import { topOfPageIcon } from '@/shared/icons'
       <div class="row justify-center">
         <div class="page-width-limit">
           <RouterView />
+          <q-space class="page-scroller-space" />
         </div>
       </div>
 
@@ -22,3 +23,9 @@ import { topOfPageIcon } from '@/shared/icons'
     </q-page>
   </q-page-container>
 </template>
+
+<style scoped lang="scss">
+.page-scroller-space {
+  height: 60px;
+}
+</style>

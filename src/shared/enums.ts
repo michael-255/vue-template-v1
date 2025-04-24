@@ -23,12 +23,17 @@ export enum RouteNameEnum {
 }
 
 /**
- * URL slug safe string representations of database table names.
+ * URL slug safe string representations of database table names: `example-records`
  */
-export enum TableEnum {
+export enum LocalTableEnum {
   SETTINGS = 'settings', // Standalone
   LOGS = 'logs', // Standalone
 }
+
+/**
+ * Supabase database table names must use underscores: `example_records`
+ */
+export enum TableEnum {}
 
 export enum LimitEnum {
   MAX_TEXT_AREA = 300,
@@ -81,6 +86,7 @@ export enum SettingIdEnum {
   USER_EMAIL = 'User Email',
   PROJECT_URL = 'Project URL',
   PROJECT_API_KEY = 'Project API Key',
+  DARK_MODE = 'Dark Mode',
   CONSOLE_LOGS = 'Console Logs',
   INFO_POPUPS = 'Info Popups',
   LOG_RETENTION_DURATION = 'Log Rentention Duration',
