@@ -1,9 +1,13 @@
 import LayoutEmpty from '@/layouts/LayoutEmpty.vue'
 import LayoutMenu from '@/layouts/LayoutMenu.vue'
-import { RouteNameEnum } from '@/shared/enums'
+import { localDatabase } from '@/services/local-database'
+import { LocalTableEnum, RouteNameEnum, SettingIdEnum } from '@/shared/enums'
+import { useBackendStore } from '@/stores/backend'
 import ViewDashboard from '@/views/ViewDashboard.vue'
 import ViewSettings from '@/views/ViewSettings.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+
+const publicRoutes = [RouteNameEnum.DASHBOARD, RouteNameEnum.SETTINGS, RouteNameEnum.NOT_FOUND]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +56,25 @@ const router = createRouter({
       component: () => import('@/views/ViewTableLogs.vue'),
     },
   ],
+})
+
+router.beforeEach(async (to, from, next) => {
+  const backendStore = useBackendStore()
+
+  const requiresAuth = !publicRoutes.includes(to.name as RouteNameEnum)
+
+  if (!backendStore.isAuthenticated && requiresAuth) {
+    // Open login dialog
+    await localDatabase.table(LocalTableEnum.SETTINGS).put({
+      id: SettingIdEnum.LOGIN_DIALOG,
+      value: true,
+    })
+
+    next()
+  } else {
+    // User is authenticated or route doesn't require auth
+    next()
+  }
 })
 
 export default router

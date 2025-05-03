@@ -68,6 +68,8 @@ export const useBackendStore = defineStore('backend', {
   },
 
   getters: {
-    isAuthenticated: (state) => !!state.user?.email,
+    isAuthenticated: (state) => {
+      return !!state.user?.id && !!state.user?.email
+    },
   },
 })
