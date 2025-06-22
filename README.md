@@ -55,7 +55,7 @@ npm run test:e2e -- --debug
 
 ## Project Creation Steps
 
-### 1. Initial project files and dependencies
+### Install Dependencies
 
 ```sh
 # Create a Vue project (creates project directory and initial files for you)
@@ -64,20 +64,31 @@ npm create vue@latest
 npm install --save quasar @quasar/extras
 npm install --save-dev @quasar/vite-plugin sass-embedded@^1.80.2
 # Install other dependencies as needed
+npm install @supabase/supabase-js
+npx supabase init
+npm install zod
+npm install dexie
 ```
 
-### 2. Setup Quasar
-
-Add to `main.ts`:
+### Update `~/src/main.ts`
 
 ```ts
 import { symRoundedClose } from '@quasar/extras/material-symbols-rounded'
 import '@quasar/extras/material-symbols-rounded/material-symbols-rounded.css'
 import '@quasar/extras/roboto-font/roboto-font.css'
+import { createPinia } from 'pinia'
 import { Dialog, Loading, Meta, Notify, Quasar } from 'quasar'
 import 'quasar/dist/quasar.css'
 import quasarIconSet from 'quasar/icon-set/material-symbols-rounded'
-// ...
+import { createApp } from 'vue'
+import App from './App.vue'
+import './assets/base.css'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
 app.use(Quasar, {
   iconSet: quasarIconSet,
   plugins: {
@@ -116,28 +127,39 @@ app.use(Quasar, {
     loading: {},
   },
 })
+
+app.mount('#app')
 ```
 
-Add to `vite.config.ts`:
+### Update `~/vite.config.ts`:
 
 ```ts
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
-// ...
+import vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
+import vueDevTools from 'vite-plugin-vue-devtools'
+
 export default defineConfig({
   plugins: [
     vue({
       template: { transformAssetUrls },
     }),
-    // ...
+    vueDevTools(),
     quasar({
       autoImportComponentCase: 'kebab',
     }),
   ],
-  // ...
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  base: '/<REPO>/',
 })
 ```
 
-### 3. GitHub Pages
+### Update GitHub Pages
 
 Configure GitHub Pages to deploy using GitHub Actions.
 
@@ -167,6 +189,8 @@ Configure GitHub Pages to deploy using GitHub Actions.
   - Update `manifest.webmanifest` with `theme_color` to match `App.vue -> useMeta()`
   - Update `manifest.webmanifest` with `background_color` to match `App.vue -> useMeta()`
 
+- Update `~/public/manifest.webmanifest`
+
 ```json
 {
   "name": "<PROJECT_NAME>",
@@ -193,7 +217,7 @@ Configure GitHub Pages to deploy using GitHub Actions.
 }
 ```
 
-- Update `index.html`
+### Update `~/index.html`
 
 ```html
 <!doctype html>
@@ -206,7 +230,7 @@ Configure GitHub Pages to deploy using GitHub Actions.
 </html>
 ```
 
-- Update `eslint.config.ts`
+### Update `~/eslint.config.ts`
 
 ```ts
 export default defineConfigWithVueTs(
@@ -219,16 +243,16 @@ export default defineConfigWithVueTs(
 )
 ```
 
-- Update `GitHub`
+### Update `GitHub`
 
-  - Description
-  - Website (Use GitHub Pages)
-  - Add Topic keywords
-  - Update the `Include in the home page` section
+- Description
+- Website (Use GitHub Pages)
+- Add Topic keywords
+- Update the `Include in the home page` section
 
-    - Uncheck `Releases`
-    - Uncheck `Packages`
-    - Keep `Deployments` (for GitHub Pages)
+  - Uncheck `Releases`
+  - Uncheck `Packages`
+  - Keep `Deployments` (for GitHub Pages)
 
 ## Credits
 
